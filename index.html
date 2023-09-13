@@ -79,8 +79,8 @@
       container: 'map',
       style: 'std.json',
       hash: true,
-      zoom: 14,
-      center: [139.402420, 34.741553],
+      zoom: 15.02,
+      center: [139.76667, 32.45297],
       pitch: 60,
       bearing: 0,
       attributionControl: false,
@@ -111,7 +111,7 @@
     // Attributionを折りたたみ表示
     map.addControl(new maplibregl.AttributionControl({
       compact: true,
-      customAttribution: '<a href="https://twitter.com/shi__works" target="_blank">Twitter</a> | <a href="" target="_blank">Github</a> | <a href="https://info.tokyo-digitaltwin.metro.tokyo.lg.jp/" target="_blank">東京都 デジタルツイン実現プロジェクト</a> '
+      customAttribution: '<a href="https://twitter.com/shi__works" target="_blank">Twitter</a> | <a href="https://github.com/shi-works/tokyo-point-cloud-map-on-maplibre-gl-js" target="_blank">Github</a> | <a href="https://info.tokyo-digitaltwin.metro.tokyo.lg.jp/" target="_blank">東京都 デジタルツイン実現プロジェクト</a> '
     }));
 
     map.on('load', () => {
@@ -121,10 +121,17 @@
         new deck.Tile3DLayer({
           id: "tile3dlayer-1",
           pointSize: 1.2,
-          // 東京都 3次元点群データ
-          data: 'https://tokyo-digitaltwin.s3.ap-northeast-1.amazonaws.com/point-cloud/point-cloud-dsm-2023/13361_oshima-machi/tileset.json',    // 大島町
+          // 東京都 3次元点群データ（伊豆大島）
+          data: 'https://tokyo-digitaltwin.s3.ap-northeast-1.amazonaws.com/point-cloud/point-cloud-dsm-2023/13361_oshima-machi/tileset.json',
           loader: Tiles3DLoader
         }),
+        new deck.Tile3DLayer({
+          id: "tile3dlayer-2",
+          pointSize: 1.2,
+          // 東京都 3次元点群データ（青ヶ島）
+          data: 'https://tokyo-digitaltwin.s3.ap-northeast-1.amazonaws.com/point-cloud/point-cloud-dsm-2023/13402_aogashima-mura/tileset.json',
+          loader: Tiles3DLoader
+        })
       ];
 
       const overlay = new deck.MapboxOverlay({
